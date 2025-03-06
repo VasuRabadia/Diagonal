@@ -1,0 +1,25 @@
+name: Example Workflow
+
+on:
+    workflow_dispatch:
+    push:
+        branches: ['main', 'feature-*']
+
+jobs:
+    unit_testing:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get files
+              uses: actions/checkout@v2
+            - name: Say hello
+              run: |
+                echo "Hello"
+                echo "How are you today?"
+                echo $ pwd
+                pwd
+                echo $ ls -la
+                ls -la
+            - name: Check Parser
+              run: |
+                echo node parser.js
+                node parser.js
