@@ -1,25 +1,25 @@
-name: Example Workflow
+name: Deployment
 
 on:
     workflow_dispatch:
     push:
-        branches: ['main', 'feature-*']
+        branches: ['main']
 
 jobs:
     unit_testing:
         runs-on: ubuntu-latest
         steps:
+            - name: Install SSH key
+              uses: shimataro/ssh-key-action@v2
+              with:
+                key: ${{ secrets.ID_RSA }}
+                name: id_rsa
+                known_hosts: ${{ secrets.KNOWN_HOSTS }}
             - name: Get files
               uses: actions/checkout@v2
-            - name: Say hello
+            - name: Look at the files
               run: |
-                echo "Hello"
-                echo "How are you today?"
                 echo $ pwd
                 pwd
                 echo $ ls -la
                 ls -la
-            - name: Check Parser
-              run: |
-                echo node parser.js
-                node parser.js
